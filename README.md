@@ -88,22 +88,22 @@ Chain33也已经全面兼容以太坊的EVM，同时还兼容以太坊的接口�
 
 #### Chain33测试环境说明
 为了方便开发者快速验证，准备了测试环境(在合约部署调用时用到)   
-1. web3.js接口 
+1. web3.js接口  
 平行链web3接口，此接口适用于通过web3.js库接入区块链的场景  
 	- RPC URL:  http://122.224.124.250:8546
 	- ChainId:  39991  
 	- 货币符号：para  
 
-2. jsonrpc接口
+2. jsonrpc接口  
 接口适用于通过java-sdk，go-sdk接入区块链的场景
 	- json rpc: http://122.224.77.188:8991  
 
-3. 燃料获取
+3. 燃料获取  
 在github的[issue](https://github.com/web3chain33/chain33-respo/issues)标签下[New issue], 格式如下：
-Title: 燃料申请  
+Title: 测试燃料申请  
 内容：   
-	- 用户地址： 写上自己的地址（地址生成方式可通过metamask插件，java-sdk或go-sdk，具体使用方式可参考下文）
 	- 对接方式： 填写是使用web3.js, java-sdk还是go-sdk来对接
+	- 用户地址： 写上自己的地址（地址生成方式可通过metamask插件，java-sdk或go-sdk，具体使用方式可参考下文）
 	- 用途： 发行NFT，还是存证，或是发行ERC20等
 
 #### EVM合约概述
@@ -116,12 +116,11 @@ Solidity语言更多信息, 请参阅  [[Solidity中文官方文档]](https://le
 根据应用层开发语言的不同，用户可选用web3.js， java-sdk, go-sdk等方式接入区块链   
 #### web3.js 
 chain33平行链除了兼容以太坊虚拟机（EVM）,同时在接口上也做了适配， 完全兼容web3.js，小狐狸插件（metamask），truffle, remix等以太坊生态工具。  以下连接介绍结合remix, metamask，truffle等工具部署运行智能合约。  
- [[开启手续费场景]](./web3-sdk/web3-sdk-withgas.md) :  介绍开启主链手续费情况下, 在平行链上部署调用智能合约。  
+ web3.js部署调用合约参考链接： [[web3-sdk]](./web3-sdk/web3-sdk.md) :  介绍开启主链手续费情况下, 在平行链上部署调用智能合约。  
 
 #### JAVA-SDK
 适用于应用平台使用JAVA开发的情况,提供SDK对应的jar包，SDK里包含了公私钥生成,合约部署方法,合约调用方法,交易签名,交易查询,区块链信息查询等方法。   
 JAVA-SDK开发环境部署参考链接： [[JAVA-SDK]](./java-sdk/java-sdk.md)  
-
 
 #### GO-SDK  
 适用于应用平台使用GO语言开发的情况,提供SDK对应的jar包，SDK里包含了公私钥生成,合约部署方法,合约调用方法,交易签名,交易查询,区块链信息查询等方法。 

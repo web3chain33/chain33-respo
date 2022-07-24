@@ -7,11 +7,11 @@
 - 添加平行链rpc连接  
 chain33主链+平行链的架构下，交易由平行链的rpc接口上链，通过metamask插件做交易构造，签名，上链的操作。  
 ![平行链连接](/resources/metamask_para_withgas.png)  
-有手续费平行链rpc  
-网络名称： chain33_para_withgas  
-新增RPC URL: http://122.224.77.188:8546  
-链ID: 39991  
-货币符号：para  
+
+- 网络名称： chain33_para_withgas  
+- 新增RPC URL: http://122.224.77.188:8546  
+- 链ID: 39991  
+- 货币符号：para  
 
 2. 编译部署合约
 - **准备测试合约**：可以参考 [[ERC1155合约]](../solidity/ERC1155ByManager.sol)     
@@ -22,13 +22,13 @@ chain33主链+平行链的架构下，交易由平行链的rpc接口上链，通
 ![Image text](../resources/remix2.png)   
 - **metamask连接remix**：环境选择[Injected Web3] -- 弹出metamask插件，提示允不允许连接此网站 -- 选择连接， 连接成功后metemask中配置的chainID和用户账户地址都会在remix界面中显示。  
 ![Image text](../resources/remix3.png)   
-- **部署合约到Chain33测试平行链上**：选择[deploy]按钮 -- 弹出matemask插件，提示部署合约所需的GAS费 (确保自己主链和平行链账户下都拥有一定数量的燃料) -- 点击确认-- 成功后会在控制台打印合约部署信息  
+- **部署合约到Chain33测试平行链上**：选择[deploy]按钮 -- 弹出matemask插件，提示部署合约所需的GAS费 (确保自己主链和平行链账户下都拥有一定数量的燃料, 可按[issue](https://github.com/web3chain33/chain33-respo/issues/3)样例获取燃料) -- 点击确认-- 成功后会在控制台打印合约部署信息  
 ![Image text](../resources/remix4.png)   
 左侧红框中Deployed Contracts:  部署好的合约地址  
-status: 合约部署的结果  
-transaction hash: 合约部署成功返回的hash值  
-from: 部署人的地址  
-gas: 部署合约需要的gas  
+- status: 合约部署的结果  
+- transaction hash: 合约部署成功返回的hash值  
+- from: 部署人的地址  
+- gas: 部署合约需要的gas  
 - **调用合约**：点击[Deployed Contracts]边上下拉箭头，再点击[mint]函数边上的下拉箭头，输入mint函数所需的参数(注意数据类型要和solidity合约中定义的保持一致)   
 ![Image text](../resources/remix5.png)   
 - **查询结果**：点击[Deployed Contracts]边上下拉箭头，再点击[balanceof]函数边上的下拉箭头，输入balanceof函数所需的参数,点击[call]按钮查询  

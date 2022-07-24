@@ -130,4 +130,4 @@ String withholdPrivateKey = "";
 ```  
 - 给上述两个地址下充值测试用的燃料  
 
-- 运行测试程序  
+- 运行测试程序ERC1155Test.java  
