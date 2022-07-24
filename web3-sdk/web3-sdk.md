@@ -1,8 +1,17 @@
-## 一. 通过remix和metamask在无手续费测试链上部署调用NFT合约  
+# 在开启手续费的chain33平行链上部署运行EVM合约
+方式一： 通过remix和metamask部署  
+方式二： 通过truffle工具部署  
+
+## 一. 通过remix和metamask部署调用NFT合约  
 1.  浏览器安装metamask插件，创建账户后添加主链和平行链的rpc连接  
-![主链连接](/resources/metamask.png)    
-新增RPC URL:  此处改成用户自己YCC平行链的rpc链接    
-链ID: 使用YCC注册的固定值 3999    
+- 添加平行链rpc连接  
+chain33主链+平行链的架构下，交易由平行链的rpc接口上链，通过metamask插件做交易构造，签名，上链的操作。  
+![平行链连接](/resources/metamask_para_withgas.png)  
+
+- 网络名称： chain33_para_withgas  
+- 新增RPC URL: http://122.224.77.188:8546  
+- 链ID: 39991  
+- 货币符号：para  
 
 2. 编译部署合约
 - **准备测试合约**：可以参考 [[ERC1155合约]](../solidity/ERC1155ByManager.sol)     
@@ -13,20 +22,20 @@
 ![Image text](../resources/remix2.png)   
 - **metamask连接remix**：环境选择[Injected Web3] -- 弹出metamask插件，提示允不允许连接此网站 -- 选择连接， 连接成功后metemask中配置的chainID和用户账户地址都会在remix界面中显示。  
 ![Image text](../resources/remix3.png)   
-- **部署合约到Chain33测试平行链上**：选择[deploy]按钮 -- 弹出matemask插件，提示部署合约所需的GAS费 (确保自己账户下拥有一定数量的代币) -- 点击确认-- 成功后会在控制台打印合约部署信息  
+- **部署合约到Chain33测试平行链上**：选择[deploy]按钮 -- 弹出matemask插件，提示部署合约所需的GAS费 (确保自己主链和平行链账户下都拥有一定数量的燃料, 可按[issue](https://github.com/web3chain33/chain33-respo/issues/3)样例获取燃料) -- 点击确认-- 成功后会在控制台打印合约部署信息  
 ![Image text](../resources/remix4.png)   
 左侧红框中Deployed Contracts:  部署好的合约地址  
-status: 合约部署的结果  
-transaction hash: 合约部署成功返回的hash值  
-from: 部署人的地址  
-gas: 部署合约需要的gas  
+- status: 合约部署的结果  
+- transaction hash: 合约部署成功返回的hash值  
+- from: 部署人的地址  
+- gas: 部署合约需要的gas  
 - **调用合约**：点击[Deployed Contracts]边上下拉箭头，再点击[mint]函数边上的下拉箭头，输入mint函数所需的参数(注意数据类型要和solidity合约中定义的保持一致)   
 ![Image text](../resources/remix5.png)   
 - **查询结果**：点击[Deployed Contracts]边上下拉箭头，再点击[balanceof]函数边上的下拉箭头，输入balanceof函数所需的参数,点击[call]按钮查询  
 ![Image text](../resources/remix6.png)   
 
-##二. 通过truffle和metamask在YCC平行链上部署应用  
-我们用以太坊上的一个应用（NFT-Marketplace）为例，说明如何把它快速移植到YCC平行链上。  
+##二. 通过truffle在chain33平行链上部署应用  
+我们用以太坊上的一个应用（NFT-Marketplace）为例，说明如何把它快速移植到chain33平行链上。  
 NFT-Marketplace开源地址：https://github.com/BravoNatalie/NFT-Marketplace， 实现了一个Demo性质的去中心化NFT交易市场，可以发行也可以买卖NFT。 
 
 1. 环境准备
@@ -59,11 +68,11 @@ yarn
 # 1. 在文件头增加const定义
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 # 2. 增加以下YCC平行链网络的配置
-    ycc: {
-      network_id: "3999",       // YCC  network_id： 对应YCC的chainid，固定填写3999
-      from: "0xc05109180ac5298e3a9b7d7e70abf98ffb986d22",  // 用户地址，需要保证地址下有燃料
+    chain33_withgas: {
+      network_id: "39991",       // chainid，固定填写39991
+      from: "0x9c5416E4C1798B40e67A0881F96da6E909D1E407",  // 用户地址，需要保证地址下有燃料
       provider: function() {
-        return new HDWalletProvider(mnemonic , "http://121.52.224.92:8546/"); // mnemonic：钱包助记词; url: YCC平行链对应的rpc地址
+        return new HDWalletProvider(mnemonic , "http://121.52.224.92:8546/"); // mnemonic：钱包助记词; url: 平行链对应的rpc地址
       }
     },
 ```
@@ -76,7 +85,7 @@ export PATH=$(pwd)/node_modules/.bin:$PATH
 cd client\src\contracts
 rm -rf *
 # 再回到NFT-Marketplace目录下，执行
-truffle migrate --network  ycc
+truffle migrate --network  chain33_withgas
 # truffle会将这三个合约文件编译部署到链上，出现以下提示代表部署成功
 Deploying 'ArtMarketplace'
 --------------------------
@@ -114,4 +123,4 @@ yarn start
 - 其它用户在界面能看到上架的NFT，可进行购买  
 ![Image text](../resources/market4.png)   
 
-**备注：以太坊的精度是10的18次方，chain33的精度是10的8次方，开发时要注意精度的转换， 处理细节待补充**
+**备注：以太坊的精度是10的18次方，chain33的精度是10的8次方，开发时要注意精度的转换**
