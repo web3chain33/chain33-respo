@@ -72,7 +72,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
       network_id: "39991",       // chainid，固定填写39991
       from: "0x9c5416E4C1798B40e67A0881F96da6E909D1E407",  // 用户地址，需要保证地址下有燃料
       provider: function() {
-        return new HDWalletProvider(mnemonic , "http://121.52.224.92:8546/"); // mnemonic：钱包助记词; url: 平行链对应的rpc地址
+        return new HDWalletProvider(mnemonic , "http://122.224.77.188:8546/"); // mnemonic：钱包助记词; url: 平行链对应的rpc地址
       }
     },
 ```
